@@ -9,18 +9,16 @@ class Solution {
   public:
     void nearlySorted(vector<int>& arr, int k) {
         // code
-        priority_queue<int,vector<int>,greater<int>> pq;
+        map<int,int> mp;
+        for (auto pr:arr)
+           mp[pr]++;
+
         int j=0;
-        for(int i=0; i<arr.size();i++){
-            pq.push(arr[i]);
-            if(pq.size() > k){
-                arr[j++] = pq.top();
-                pq.pop();
+        for (auto i:mp) {
+            while (i.second > 0) {
+                arr[j++] = (i.first);
+                i.second--;
             }
-        }
-        while(!pq.empty()){
-            arr[j++] = pq.top();
-            pq.pop();
         }
     }
 };
